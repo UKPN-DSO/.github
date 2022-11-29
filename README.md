@@ -1,2 +1,2 @@
-# UK Power Networks - Distribution System Operator
-The GitHub home of the UKPN DSO.
+# .github
+This repo enables the public view of the UKPN-DSO company github homepage.
