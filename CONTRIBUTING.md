@@ -23,6 +23,82 @@ If you are new to this project, you will most likely be making a feature branch 
 | Development (dev) | This is where core developments are made. The dev branch should work; broken code should not be pushed here. However, the barrier for what is _working_ is significantly lower than main. This is where new features are staged for a merge to main. Dev represents the latest in all features. Though these changes cannot make it to production before going through PRs to main, release and then prod. Dev can be directly edited for smaller changes, or branched from for work task features. Once a release or hotfix is completed into PR, it cascades back down to dev. | Developers | Feature and main. | N/A | Permanent branch |
 | Feature | A feature branch is for more time consuming developments or developments that present significant change risk. As features must undergo PRs to get into dev, they should be used only if the new developments are disruptive. Feature branches should not really become substantial changes. Small PRs are preferable at this stage for simplicity. | Developers | Development or feature | Yes |
 
+
+This is the git branch scheme visualised.
+```mermaid
+%%{init: {'theme': 'base' } }%%
+gitGraph
+    checkout main
+    commit id: "initial"
+    commit id: "main setup" tag: "v0.1.0"
+    branch develop order: 3
+    checkout develop
+    commit id: "develop setup"
+    commit
+    branch small-feature order: 4
+    commit id: "feature started"
+    checkout develop
+    commit id: "general changes"
+    checkout small-feature
+    commit
+    checkout develop
+    commit
+    branch large-feature order: 5
+    commit id: "next feature started"
+    commit
+    checkout small-feature
+    commit
+    checkout develop
+    commit
+    checkout small-feature
+    merge develop
+    checkout develop
+    merge small-feature
+    commit
+    branch release order: 2
+    checkout release
+    commit id: "staged for release"
+    checkout develop
+    commit
+    checkout large-feature
+    commit
+    checkout release
+    commit
+    checkout main
+    merge release tag: "v0.1.0"
+    checkout develop
+    merge release
+    checkout main
+    branch hotfix order: 1
+    checkout hotfix
+    commit
+    checkout develop
+    commit
+    checkout large-feature
+    commit
+    checkout hotfix
+    commit
+    checkout main
+    merge hotfix tag: "v0.1.1"
+    checkout develop
+    merge hotfix
+    commit
+    checkout large-feature
+    merge develop
+    checkout develop
+    merge large-feature
+    commit
+    checkout release
+    merge develop
+    commit
+    commit
+    checkout main
+    merge release tag: "v1.0.0"
+    checkout develop
+    merge release
+  ```
+  
+
 ### Pull requests (merging)
 Merging branches with a pull request (PR) is the process of peer review of the code. The level of scruitiny of a PR depends on the branch that is receiving a merge. For example, the PR to go from release to production will have the highest level of scrutiny and require signoff by all senior lead developers and devops. However, the PR from feature to development would require less scrutiny.
 
