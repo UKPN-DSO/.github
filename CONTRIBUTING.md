@@ -139,11 +139,3 @@ The project is created and maintained by the following team.
 ## Useful tips
 [Markdown compiler](https://stackedit.io/app#)
 
-Flowcharts made using [Mermaid](https://mermaidjs.github.io/).
-```mermaid
-graph LR
-A[Square Rect] -- Link text --> B((Circle))
-A --> C(Round Rect)
-B --> D{Rhombus}
-C --> D
-```
