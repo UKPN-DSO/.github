@@ -2,12 +2,116 @@
 The Data Science & Development Team aims to produce valuable software and tooling for the DNO. 
 This is GitHub organisation that contains the various codebases for all DS&D projects.
 
-## How to contribute
+## Ways of working
 We operate a very distinct process with git on GitHub, which is deployed to our Azure VM.
 
+
+### GitHub setup
+The GitHub organisation operates as follows:
+#### Organisation
+The organisation contains the [.github](https://github.com/UKPN-DSO/.github), [.github-private[](),](https://github.com/UKPN-DSO/.github-private) and all core reprositories belonging to the team. 
+The organisation also gontains the project [Backlog](https://github.com/orgs/UKPN-DSO/projects/1) with all the tasks, where sprints can be managed.
+
+#### Repos
+Repositories should follow the [repo template design]().
+
+#### Milestones
+Each repo can have milestones. These are long term guiding deliverables or outcomes for the team to achieve. The milestone belongs to a project (hence why it lives in the repo). 
+
+#### Tasks (a.k.a., issues)
+Tasks can be bugs, improvements, pipelines, documentation or entirely new features.
+A task is associataed to a repo, and should align to a milestone. 
+Tasks have many labelling options, and will be asigned `sprint focus` when ready to be completed.
+Tasks can be created from within the repo itself, or directly on the [Backlog](https://github.com/orgs/UKPN-DSO/projects/1).
+All tasks should be assigned: an owner, a repo, a milestone, and correct labels. They should also have a description.
+
+#### Work flow diagram
+The work flow is visualised like so.
+
+```mermaid
+classDiagram
+    Organisation --|> __github : public
+    Organisation --|> __github_private : private
+    Organisation --|> Backlog
+    Organisation --|> repo_template
+    repo_template --|> Repo : inheritance
+    Repo --|> Milestone
+    Milestone --|> Task
+    Backlog <|--|> Task
+    Task <|--|> Repo
+    __github --|> Task : template
+    
+    class Organisation{
+      owner
+      members
+      contributors
+      permissions
+    }
+    
+    class __github{
+      public readme.md      
+      code of conduct
+      contribution
+      license
+      support
+      templates
+    }
+    
+    class __github_private{
+      members readme.md
+      setup shell scripts
+    }
+
+    class Backlog{
+      tasks
+      sprint boards
+      task_view(all / project / sprint)
+    }
+
+    class Task{
+        assigned dev
+        associated labels
+        associated milestone
+        associated repo
+        description
+        deadline
+        is_sprint_focus()
+        type(task / issue / bug / feature)
+        status(backlog / ready / in progress / done)
+    }
+
+    class Milestone{
+        description 
+        information
+        deadline
+        is_sprint_focus()
+    }
+
+    class repo_template{
+        \scripts\
+        \src\
+        \tests\
+        .gitignore
+        environment.yml
+        pyproject.toml
+        readme.md
+        
+    }
+
+    class Repo{
+        project specific code
+        milestones
+        tasks
+    }
+```
+  
+  
+
+
 ### Project management
-Work items can be found in the Azure Operational Forecasting repo Boards. 
-All active lines of development should be covered by a work item. 
+Work items can be found in the projects [Backlog](https://github.com/orgs/UKPN-DSO/projects/1). 
+All active lines of development should be covered by an open issue. 
+Each week, a tasks will be assigned to the sprint, working towards an overall milestone.
 Keep track of the work items assigned to you. 
 
 ### Git branches
